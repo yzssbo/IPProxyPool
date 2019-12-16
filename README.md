@@ -107,7 +107,7 @@
    ### 接口调用案例
       import requests
    
-      response = requests.get(url='http://xxx.xxx.xxx.xxx:16688/random?protocol=htttp&nick_type=2')
+      response = requests.get(url='http://xxx.xxx.xxx.xxx:16688/random?protocol=http&nick_type=2')
 
       data = response.content.decode()
    
@@ -118,7 +118,7 @@
    
    ### 觉得麻烦懒得看？没关系直接使用我已经部署好的地址
    
-   http://118.25.93.211:16688/random?protocol=https&nick_type=2
+   http://118.25.93.211:16688/random?protocol=http&nick_type=2
    
    http://118.25.93.211:16688/proxies?protocol=https&nick_type=2
 
