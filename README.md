@@ -105,13 +105,13 @@
    
 
    ### 接口调用案例
-   import requests
+      import requests
    
-   response = requests.get(url='http://xxx.xxx.xxx.xxx:16688/random?protocol=htttp&nick_type=2')
+      response = requests.get(url='http://xxx.xxx.xxx.xxx:16688/random?protocol=htttp&nick_type=2')
 
-   data = response.content.decode()
+      data = response.content.decode()
    
-   print(data)  #  http://47.98.176.205:8118
+      print(data)  #  http://47.98.176.205:8118
    
    
    
