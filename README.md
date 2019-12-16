@@ -124,10 +124,10 @@ pip install -r requerments.txt
    ```python
    # 调用接口
    import requests
-   response = requests.get(url='http://xxx.xxx.xxx.xxx:5003/random?protocol=htttp&nick_type=2')
+   response = requests.get(url='http://xxx.xxx.xxx.xxx:16688/random?protocol=htttp&nick_type=2')
 
    data = response.content.decode()
-print(data)  #  htttp://47.98.176.205:8118
+print(data)  #  http://47.98.176.205:8118
    ```
    
    
