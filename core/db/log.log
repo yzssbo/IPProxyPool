@@ -1,0 +1,10 @@
+2019-12-09 16:28:18 mongo_pool.py [line:47] WARNING: 已存在代理IP:{'ip': '60.176.234.179', 'port': '8888', 'protocol': -1, 'nick_type': -1, 'speed': -1, 'area': None, 'score': 50, 'disable_domains': []}
+2019-12-09 16:36:13 mongo_pool.py [line:45] WARNING: 已插入代理IP:{'ip': '192.168.0.1', 'port': '1288', 'protocol': -1, 'nick_type': -1, 'speed': -1, 'area': None, 'score': 50, 'disable_domains': [], '_id': '192.168.0.1'}
+2019-12-09 16:46:58 mongo_pool.py [line:56] INFO: 删除代理IP:{'ip': '192.168.0.1', 'port': '1288', 'protocol': -1, 'nick_type': -1, 'speed': -1, 'area': None, 'score': 50, 'disable_domains': []}
+2019-12-09 17:26:27 mongo_pool.py [line:47] WARNING: 已插入代理IP:{'ip': '202.104.113.38', 'port': '53281', 'protocol': 0, 'nick_type': 0, 'speed': 8.2, 'area': None, 'score': 50, 'disable_domains': ['jd.com'], '_id': '202.104.113.38'}
+2019-12-09 17:26:37 mongo_pool.py [line:47] WARNING: 已插入代理IP:{'ip': '202.104.113.39', 'port': '53281', 'protocol': 1, 'nick_type': 0, 'speed': 1.2, 'area': None, 'score': 50, 'disable_domains': ['taobao.com'], '_id': '202.104.113.39'}
+2019-12-09 17:26:44 mongo_pool.py [line:47] WARNING: 已插入代理IP:{'ip': '202.104.113.40', 'port': '53281', 'protocol': 2, 'nick_type': 0, 'speed': 4.0, 'area': None, 'score': 50, 'disable_domains': [], '_id': '202.104.113.40'}
+2019-12-09 17:26:53 mongo_pool.py [line:47] WARNING: 已插入代理IP:{'ip': '202.104.113.41', 'port': '53281', 'protocol': 2, 'nick_type': 0, 'speed': -1, 'area': None, 'score': 49, 'disable_domains': [], '_id': '202.104.113.41'}
+2019-12-12 14:49:01 mongo_pool.py [line:49] WARNING: 已插入代理IP:{'ip': '202.104.113.41', 'port': '53281', 'protocol': 2, 'nick_type': 0, 'speed': -1, 'area': None, 'score': 49, 'disable_domains': [], '_id': '202.104.113.41'}
+2019-12-12 14:49:30 mongo_pool.py [line:51] WARNING: 已存在代理IP:{'ip': '202.104.113.41', 'port': '53281', 'protocol': 2, 'nick_type': 0, 'speed': -1, 'area': None, 'score': 49, 'disable_domains': []}
+2019-12-12 14:49:38 mongo_pool.py [line:49] WARNING: 已插入代理IP:{'ip': '202.104.113.39', 'port': '53281', 'protocol': 1, 'nick_type': 0, 'speed': 1.2, 'area': None, 'score': 50, 'disable_domains': ['taobao.com'], '_id': '202.104.113.39'}
