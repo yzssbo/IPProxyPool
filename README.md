@@ -36,7 +36,7 @@
 ### 封装了虚拟环境，支持一些简化命令
     2. pip3 install virtualenvwrapper
 
-注：新的服务器中没有pip命令需要使用 sudo apt—get install python3-pip 进行安装后再执行上方操作
+    注：新的服务器中没有pip命令需要使用 sudo apt-get install python3-pip 进行安装后再执行上方操作
 
 
 ### 添加环境变量：
