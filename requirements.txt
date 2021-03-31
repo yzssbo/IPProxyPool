@@ -9,7 +9,7 @@ idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10.3
 Js2Py==0.66
-lxml==4.0.0
+lxml==4.6.3
 MarkupSafe==1.1.1
 pbr==5.4.3
 pika==1.1.0
