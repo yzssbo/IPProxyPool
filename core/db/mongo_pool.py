@@ -36,6 +36,9 @@ class MongoPool(object):
         # 1.1 在init中, 建立数据库的链接
         self.client = MongoClient(MONGO_URL)
         # 1.2 获取要操作的集合
+        self.db = self.client['admin']
+        self.db.authenticate('yzssbo', 'yy961124')
+
         self.proxies = self.client['proxies_pool']['proxies']
 
     def __del__(self):
