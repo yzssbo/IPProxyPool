@@ -1,0 +1,13 @@
+.DS_Store
+.idea*.pyc
+.idea
+__pycache__
+logs/*[!*.gitignore]
+async_task/__stop_*
+*.xml
+.idea
+*.log
+*.pid
+*.xls
+*.pid
+bin/*pid

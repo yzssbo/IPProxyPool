@@ -1,7 +1,7 @@
 import random
 import time
 
-from core.proxy_spider.base_spider import BaseSpider
+from IPProxyPool.core.proxy_spider.base_spider import BaseSpider
 
 
 

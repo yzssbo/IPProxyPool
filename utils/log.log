@@ -1,8 +1,0 @@
-2019-12-08 18:25:01 log.py [line:51] INFO: 状态信息
-2019-12-08 18:25:01 log.py [line:52] WARNING: 警告信息
-2019-12-08 18:25:01 log.py [line:53] ERROR: 错误信息
-2019-12-08 18:25:01 log.py [line:54] CRITICAL: 严重错误信息
-2019-12-08 18:28:52 log.py [line:51] INFO: 状态信息
-2019-12-08 18:28:52 log.py [line:52] WARNING: 警告信息
-2019-12-08 18:28:52 log.py [line:53] ERROR: 错误信息
-2019-12-08 18:28:52 log.py [line:54] CRITICAL: 严重错误信息

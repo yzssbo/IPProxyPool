@@ -1,10 +1,16 @@
 import json
+import os
 
 from flask import Flask, request
 
-from core.db.mongo_pool import MongoPool
-from settings import PROXIES_MAX_COUNT
-from utils.log import logger
+from IPProxyPool.core.db.mongo_pool import MongoPool
+from IPProxyPool.settings import PROXIES_MAX_COUNT
+from max_toolbox.max_logging import MaxLogging
+
+
+log_name = 'App'
+log_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../logs', 'app.log')
+MaxLogging.init(log_file, log_name)
 
 
 class ProxyApi(object):
@@ -13,6 +19,7 @@ class ProxyApi(object):
         self.app = Flask(__name__)
         # 创建mongodb数据库连接对象
         self.mongo_pool = MongoPool()
+        self.app.logger = MaxLogging.get_logger(log_name)
 
         @self.app.route('/random')
         def random():
@@ -28,7 +35,7 @@ class ProxyApi(object):
             try:
                 proxy = self.mongo_pool.random_proxy(protocol=protocol, domain=domain, nick_type=int(nick_type), count=PROXIES_MAX_COUNT)
             except Exception as e:
-                logger.exception(e)
+                self.app.logger.exception(e)
                 return '数据库无法获取对应的Ip,请更改参数后重试'
             if protocol:
                 return '{}://{}:{}'.format(protocol, proxy.ip, proxy.port)
@@ -50,7 +57,7 @@ class ProxyApi(object):
             try:
                 proxies = self.mongo_pool.get_proxies(protocol=protocol, domain=domain, nick_type=int(nick_type), count=PROXIES_MAX_COUNT)
             except Exception as e:
-                logger.exception(e)
+                self.app.logger.exception(e)
                 return '数据库无法获取对应的Ip,请更改参数后重试'
             proxies = [proxy.__dict__ for proxy in proxies]
             return json.dumps(proxies)
@@ -68,20 +75,18 @@ class ProxyApi(object):
             try:
                 self.mongo_pool.disable_domain(ip, domain)
             except Exception as e:
-                logger.exception(e)
+                self.app.logger.exception(e)
                 return 'IP不存在或格式有误,请核实后再试'
 
             return 'IP:{} 禁用域名 {} 成功'.format(ip, domain)
 
-
-
     def run(self):
-        self.app.run('0.0.0.0', port=16688)
+        return self.app
 
     @classmethod
     def start(cls):
         # 4. 实现start的类方法, 用于通过类名, 启动服务
-        cls().run()
+        return cls().run()
 
 
 if __name__ == '__main__':

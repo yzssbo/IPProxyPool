@@ -1,5 +1,10 @@
 # 打猴子补丁
+import os
+
 from gevent import monkey
+
+from max_toolbox.max_logging import MaxLogging
+
 monkey.patch_all()
 # 导入协程池
 from gevent.pool import Pool
@@ -8,10 +13,9 @@ import schedule
 import time
 import importlib
 
-from core.db.mongo_pool import MongoPool
-from core.proxy_validate.httpbin_validator import check_proxy
-from settings import PROXIES_SPIDERS, SPIDER_TIME_DELAY
-from utils.log import logger
+from IPProxyPool.core.db.mongo_pool import MongoPool
+from IPProxyPool.core.proxy_validate.httpbin_validator import check_proxy
+from IPProxyPool.settings import PROXIES_SPIDERS, SPIDER_TIME_DELAY
 
 """
 8.5 实现运行爬虫模块
@@ -35,6 +39,9 @@ from utils.log import logger
     4.2 创建当前类的对象, 调用run方法
     4.3 使用schedule模块, 每隔一定的时间, 执行当前对象的run方法
 """
+log_name = 'RunSpider'
+log_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../logs', 'run_spider.log')
+MaxLogging.init(log_file, log_name)
 
 
 class RunSpider(object):
@@ -82,17 +89,18 @@ class RunSpider(object):
                     # 写入数据库
                     self.mongo_pool.insert_one(proxy)
         except Exception as e:
-            logger.exception(e)
+            MaxLogging.get_logger(log_name).exception(e)
 
     @classmethod
     def start(cls):
         cls().run()
 
-        schedule.every(SPIDER_TIME_DELAY).hours.do(cls().run)
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
-
 
 if __name__ == '__main__':
-    RunSpider.start()
+    schedule.every(SPIDER_TIME_DELAY).hours.do(RunSpider.start)
+    stop_file = os.path.join(os.path.dirname(__file__), '__stop_run_spider__')
+    while True:
+        if os.path.exists(stop_file):
+            break
+        schedule.run_pending()
+        time.sleep(1)

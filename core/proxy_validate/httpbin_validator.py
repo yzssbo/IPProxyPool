@@ -22,10 +22,9 @@ import time
 
 import requests
 
-from domain import Proxy
-from settings import TEST_TIMEOUT
-from utils import http
-from utils.log import logger
+from IPProxyPool.domain import Proxy
+from IPProxyPool.settings import TEST_TIMEOUT
+from IPProxyPool.utils import http
 
 
 # 内部封装一个私有方法:检测方法

@@ -1,11 +1,12 @@
+import os
 import random
 
 import pymongo
 from pymongo import MongoClient
 
-from domain import Proxy
-from settings import MONGO_URL
-from utils.log import logger
+from IPProxyPool.domain import Proxy
+from IPProxyPool.settings import MONGO_URL
+from max_toolbox.max_logging import MaxLogging
 
 """
 7. 实现代理池的数据库模块
@@ -25,6 +26,10 @@ from utils.log import logger
     3.3 实现根据协议类型 和 要访问网站的域名, 随机获取一个代理IP
     3.4 实现把指定域名添加到指定IP的disable_domain列表中.
 """
+log_name = 'MongoPoolLog'
+log_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '../logs', 'mongo_pool.log')
+MaxLogging.init(log_file, log_name)
+
 
 class MongoPool(object):
     def __init__(self):
@@ -32,7 +37,6 @@ class MongoPool(object):
         self.client = MongoClient(MONGO_URL)
         # 1.2 获取要操作的集合
         self.proxies = self.client['proxies_pool']['proxies']
-
 
     def __del__(self):
         # 1.3 关闭数据库连接
@@ -46,9 +50,9 @@ class MongoPool(object):
 
             dict['_id'] = proxy.ip
             self.proxies.insert_one(dict)
-            logger.warning('已插入代理IP:{}'.format(proxy))
+            MaxLogging.get_logger(log_name).warning('已插入代理IP:{}'.format(proxy))
         else:
-            logger.warning('已存在代理IP:{}'.format(proxy))
+            MaxLogging.get_logger(log_name).warning('已存在代理IP:{}'.format(proxy))
 
     def update_one(self, proxy):
         """2.2 实现修改功能"""
@@ -57,7 +61,7 @@ class MongoPool(object):
     def delete_one(self, proxy):
         """2.3 实现删除代理: 根据代理的Ip进行删除"""
         self.proxies.delete_one({'_id': proxy.ip})
-        logger.info('删除代理IP:{}'.format(proxy))
+        MaxLogging.get_logger(log_name).info('删除代理IP:{}'.format(proxy))
 
     def find_all(self):
         """2.4 查找所有代理IP"""
@@ -82,7 +86,7 @@ class MongoPool(object):
                 [('score', pymongo.DESCENDING), ('speed', pymongo.ASCENDING)]
             )
         except Exception as e:
-            logger.error(e)
+            MaxLogging.get_logger(log_name).error(e)
 
 
         # 准备列表  用于存储查询处理代理IP

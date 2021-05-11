@@ -1,7 +1,7 @@
 from lxml import etree
 
-from domain import Proxy
-from utils.http import get_request_header
+from IPProxyPool.domain import Proxy
+from IPProxyPool.utils.http import get_request_header
 """
 8.3 实现通用爬虫
 目标: 实现可以指定不同URL列表, 分组的XPATH和详情的XPATH, 从不同页面上提取代理的IP,端口号和区域的通用爬虫;

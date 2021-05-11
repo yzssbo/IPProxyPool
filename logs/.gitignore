@@ -1,0 +1,10 @@
+*.pyc
+.idea
+__pycache__
+logs/*[!*.gitignore]
+*.xml
+.idea
+*.log
+*.pid
+*.xls
+*.pid

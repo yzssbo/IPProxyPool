@@ -1,13 +1,14 @@
+import os
 import time
 from queue import Queue
 
 import schedule
 
-from core.db.mongo_pool import MongoPool
+from IPProxyPool.core.db.mongo_pool import MongoPool
 from gevent import monkey
 
-from core.proxy_validate.httpbin_validator import check_proxy
-from settings import TEST_PROXIES_ASYNC_COUNT, MAX_SCORE, TEST_PROXIES_INTERVAL
+from IPProxyPool.core.proxy_validate.httpbin_validator import check_proxy
+from IPProxyPool.settings import TEST_PROXIES_ASYNC_COUNT, MAX_SCORE, TEST_PROXIES_INTERVAL
 
 monkey.patch_all()
 from gevent.pool import Pool
@@ -98,13 +99,13 @@ class ProxyTester(object):
         #  4.2.1 调用run方法
         cls().run()
 
-        # 4.2.2 每间隔一定时间, 执行一下, run方法
-        schedule.every(TEST_PROXIES_INTERVAL).hours.do(cls().run)
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
 
 if __name__ == '__main__':
-    # pt = ProxyTester()
-    # pt.run()
-    ProxyTester.start()
+    # 4.2.2 每间隔一定时间, 执行一下, run方法
+    schedule.every(TEST_PROXIES_INTERVAL).hours.do(ProxyTester.start)
+    stop_file = os.path.join(os.path.dirname(__file__), '__stop_proxy_test__')
+    while True:
+        if os.path.exists(stop_file):
+            break
+        schedule.run_pending()
+        time.sleep(1)
