@@ -1,4 +1,4 @@
-from settings import MAX_SCORE
+from IPProxyPool.settings import MAX_SCORE
 
 # 代理ip的模型类
 class Proxy(object):
