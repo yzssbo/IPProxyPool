@@ -101,6 +101,7 @@ class ProxyTester(object):
 
 
 if __name__ == '__main__':
+    ProxyTester.start()
     # 4.2.2 每间隔一定时间, 执行一下, run方法
     schedule.every(TEST_PROXIES_INTERVAL).hours.do(ProxyTester.start)
     stop_file = os.path.join(os.path.dirname(__file__), '__stop_proxy_test__')

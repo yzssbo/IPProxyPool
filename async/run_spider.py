@@ -58,6 +58,8 @@ class RunSpider(object):
             # core.proxy_spider.proxy_spiders.Ip66Spider
             # 获取模块名和类名,然后根据模块名动态创建类对象
             module_name, class_name = full_class_name.rsplit('.', maxsplit=1)
+            print(module_name)
+            print(class_name)
             # 根据模块名导入模块
             module = importlib.import_module(module_name)
             # 根据模块获取爬虫对象
@@ -67,13 +69,13 @@ class RunSpider(object):
             yield spider
 
     def run(self):
-
         # 2.1 根据配置文件信息,获取爬虫对象列表
         spiders = self.get_spider_from_settings()
         for spider in spiders:
             # 2.2 遍历爬虫对象列表, 获取爬虫对象, 遍历爬虫对象的get_proxies方法, 获取代理IP
             # self._execute_one_spider_task(spiders)
             # 抽取出的方法使用线程池调度
+            print(spider)
             self.coroutine_pool.apply_async(self._execute_one_spider_task, args=(spider, ))
         # 3.4 调用协程的 join方法, 让当前线程等待协程任务的完成
         self.coroutine_pool.join()
@@ -97,6 +99,7 @@ class RunSpider(object):
 
 
 if __name__ == '__main__':
+    RunSpider.start()
     schedule.every(SPIDER_TIME_DELAY).hours.do(RunSpider.start)
     stop_file = os.path.join(os.path.dirname(__file__), '__stop_run_spider__')
     while True:
