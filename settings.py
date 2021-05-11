@@ -20,11 +20,11 @@ MONGO_URL = '127.0.0.1:27017'
 
 # 爬虫任务列表,全目录,全类名/路径
 PROXIES_SPIDERS = [
-    'core.proxy_spider.proxy_spider.Ip66Spider',
-    'core.proxy_spider.proxy_spider.Ip3366Spider',
-    'core.proxy_spider.proxy_spider.KuaiSpider',
-    'core.proxy_spider.proxy_spider.ProxylistplusSpider',
-    'core.proxy_spider.proxy_spider.XiciSpider',
+    'IPProxyPool.core.proxy_spider.proxy_spider.Ip66Spider',
+    'IPProxyPool.core.proxy_spider.proxy_spider.Ip3366Spider',
+    'IPProxyPool.core.proxy_spider.proxy_spider.KuaiSpider',
+    'IPProxyPool.core.proxy_spider.proxy_spider.ProxylistplusSpider',
+    'IPProxyPool.core.proxy_spider.proxy_spider.XiciSpider',
 ]
 
 
