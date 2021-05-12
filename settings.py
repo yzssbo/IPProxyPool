@@ -8,7 +8,7 @@ LOG_FILENAME = 'log.log'    # 默认日志文件名称
 
 
 # 定义代理IP的评分初始值, 方便后期修改
-MAX_SCORE = 50
+MAX_SCORE = 20
 
 
 # 检测IP的最大超时等待时间
@@ -29,14 +29,14 @@ PROXIES_SPIDERS = [
 
 
 # 定时启动爬虫任务时间间隔
-SPIDER_TIME_DELAY = 24
+SPIDER_TIME_DELAY = 3
 
 # 定时启动检测IP任务时间间隔
-TEST_PROXIES_INTERVAL = 12
+TEST_PROXIES_INTERVAL = 3
 
 
 # 异步检测任务数量
 TEST_PROXIES_ASYNC_COUNT = 10
 
 # 配置获取的代理IP最大数量; 这个越小可用性就越高; 但是随机性越差
-PROXIES_MAX_COUNT = 50
+PROXIES_MAX_COUNT = 20
