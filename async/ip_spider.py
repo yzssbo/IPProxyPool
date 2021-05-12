@@ -81,13 +81,14 @@ class IpSpider(object):
         try:
             # 遍历爬虫对象的get_proxies方法, 获取代理IP
             for proxy in spider.get_proxies():
+                MaxLogging.get_logger(log_name).info('-' * 20 + '> 成功抓取 来自 {0} 的ip {1}'.format(proxy.web_name, proxy.ip))
                 # 2.3 检测代理IP(代理IP检测模块)
                 proxy = check_proxy(proxy)
                 # 如果速度不为-1, 说明可用
                 if proxy.speed != -1:
                     # 写入数据库
                     self.mongo_pool.insert_one(proxy)
-                    MaxLogging.get_logger(log_name).info('-'*20 + '> 成功抓取 {}'.format(proxy.ip))
+                    MaxLogging.get_logger(log_name).info('-'*20 + '> {} 验证成功'.format(proxy.ip))
         except Exception as e:
             MaxLogging.get_logger(log_name).exception(e)
 

@@ -52,6 +52,7 @@ class Ip3366Spider(BaseSpider):
         'port': './td[2]/text()',
         'area': './td[5]/text()'
     }
+    web_name = 'ip3366'
 
     # 当我们两个页面访问时间间隔太短了, 就报错了; 这是一种反爬手段.
     def get_page_from_url(self, url):
@@ -59,6 +60,10 @@ class Ip3366Spider(BaseSpider):
         time.sleep(random.uniform(1, 3))
         # 调用父类的方法, 发送请求, 获取响应数据
         return super().get_page_from_url(url)
+
+    def parse_proxies_from_page(self, page, web_name=web_name):
+        return super().parse_proxies_from_page(page, web_name)
+
 
 """
 3. 实现快代理爬虫: https://www.kuaidaili.com/free/inha/1/
@@ -79,12 +84,17 @@ class KuaiSpider(BaseSpider):
         'area': './td[5]/text()'
     }
 
+    web_name = 'kuaidaili'
+
     # 当我们两个页面访问时间间隔太短了, 就报错了; 这是一种反爬手段.
     def get_page_from_url(self, url):
         # 随机等待1,3s
         time.sleep(random.uniform(1, 3))
         # 调用父类的方法, 发送请求, 获取响应数据
         return super().get_page_from_url(url)
+
+    def parse_proxies_from_page(self, page, web_name=web_name):
+        return super().parse_proxies_from_page(page, web_name)
 
 
 """
@@ -105,6 +115,7 @@ class ProxylistplusSpider(BaseSpider):
         'port': './td[3]/text()',
         'area': './td[5]/text()'
     }
+    web_name = 'proxylist'
 
     # 当我们两个页面访问时间间隔太短了, 就报错了; 这是一种反爬手段.
     def get_page_from_url(self, url):
@@ -113,6 +124,8 @@ class ProxylistplusSpider(BaseSpider):
         # 调用父类的方法, 发送请求, 获取响应数据
         return super().get_page_from_url(url)
 
+    def parse_proxies_from_page(self, page, web_name=web_name):
+        return super().parse_proxies_from_page(page, web_name)
 
 
 """
@@ -134,12 +147,17 @@ class Ip66Spider(BaseSpider):
         'area': './td[3]/text()'
     }
 
+    web_name = 'ip66'
+
     # 当我们两个页面访问时间间隔太短了, 就报错了; 这是一种反爬手段.
     def get_page_from_url(self, url):
         # 随机等待1,3s
         time.sleep(random.uniform(1, 3))
         # 调用父类的方法, 发送请求, 获取响应数据
         return super().get_page_from_url(url)
+
+    def parse_proxies_from_page(self, page, web_name=web_name):
+        return super().parse_proxies_from_page(page, web_name)
 
 
 if __name__ == '__main__':

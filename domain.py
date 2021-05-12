@@ -2,7 +2,7 @@ from IPProxyPool.settings import MAX_SCORE
 
 # 代理ip的模型类
 class Proxy(object):
-    def __init__(self, ip, port, protocol=-1, nick_type=-1, speed=-1, area=None, score=MAX_SCORE, disable_domains=[]):
+    def __init__(self, ip, port, protocol=-1, nick_type=-1, speed=-1, area=None, web_name=None, score=MAX_SCORE, disable_domains=[]):
         # IP: 代理的Ip地址
         self.ip = ip
         # port: 代理IP的端口号
@@ -15,6 +15,8 @@ class Proxy(object):
         self.speed = speed
         # area: 代理IP所在区
         self.area = area
+        # web_name: ip来自的网站
+        self.web_name = web_name
         # score: 代理IP的评分, 用于衡量代理的可用性
         self.score = score
         # disable_domains: 不可用的域名列表,  有些代理IP在某些域名下不可用,但在其他域名下可用

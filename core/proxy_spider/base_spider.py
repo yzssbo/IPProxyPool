@@ -33,6 +33,8 @@ class BaseSpider(object):
     # detail_xpath: 组内XPATH, 获取代理IP详情的信息XPATH, 格式为:{'ip': 'xx', 'port':'xx', 'area': 'xx'}
     detail_xpath = {}
 
+    web_name = ''
+
     # 3. 提供初始方法, 传入爬虫URL列表, 分组XPATH, 详情(组内)XPATH
     def __init__(self, urls=[], group_xpath='', detail_xpath={}):
         if urls:
@@ -54,7 +56,7 @@ class BaseSpider(object):
         # 如果列表中有元素就返回第一个, 否则返回空
         return lis[0] if len(lis) != 0 else ''
 
-    def parse_proxies_from_page(self, page):
+    def parse_proxies_from_page(self, page, web_name=web_name):
         """解析页面, 提取数据, 封装为Proxy对象"""
         element = etree.HTML(page)
         trs = element.xpath(self.group_xpath)
@@ -62,7 +64,7 @@ class BaseSpider(object):
             ip = self.get_first_from_page(tr.xpath(self.detail_xpath['ip']))
             port = self.get_first_from_page(tr.xpath(self.detail_xpath['port']))
             area = self.get_first_from_page(tr.xpath(self.detail_xpath['area']))
-            proxy = Proxy(ip, port, area=area)
+            proxy = Proxy(ip, port, area=area, web_name=web_name)
             yield proxy
 
     def get_proxies(self):
