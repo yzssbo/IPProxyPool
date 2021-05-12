@@ -24,7 +24,6 @@ PROXIES_SPIDERS = [
     'IPProxyPool.core.proxy_spider.proxy_spider.Ip3366Spider',
     'IPProxyPool.core.proxy_spider.proxy_spider.KuaiSpider',
     'IPProxyPool.core.proxy_spider.proxy_spider.ProxylistplusSpider',
-    'IPProxyPool.core.proxy_spider.proxy_spider.XiciSpider',
 ]
 
 
