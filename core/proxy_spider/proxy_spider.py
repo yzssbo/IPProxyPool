@@ -1,9 +1,11 @@
 import random
 import time
 
+import requests
+
 from IPProxyPool.core.proxy_spider.base_spider import BaseSpider
-
-
+from IPProxyPool.domain import Proxy
+from IPProxyPool.utils.http import get_request_header
 
 """
 1. 实现西刺代理爬虫: http://www.xicidaili.com/nn/1
@@ -135,6 +137,7 @@ class ProxylistplusSpider(BaseSpider):
     由于66ip网页进行js + cookie反爬, 需要重写父类的get_page_from_url方法
     后来这个反扒他又取消了
 """
+
 class Ip66Spider(BaseSpider):
     # 准备URL列表
     urls = ['http://www.66ip.cn/{}.html'.format(i) for i in range(1, 6)]
@@ -154,11 +157,18 @@ class Ip66Spider(BaseSpider):
     def get_page_from_url(self, url):
         # 随机等待1,3s
         time.sleep(random.uniform(1, 3))
+        response = requests.get(url, headers=get_request_header())
+        return response.text
+
         # 调用父类的方法, 发送请求, 获取响应数据
-        return super().get_page_from_url(url)
+        # return super().get_page_from_url(url)
 
     def parse_proxies_from_page(self, page, web_name=web_name):
-        return super().parse_proxies_from_page(page, web_name)
+        import re
+        res = re.findall(r'.*?<td>(\d+.\d+.\d+.\d+.)</td><td>(\d+)', page)
+        for ip, port in res:
+            proxy = Proxy(ip, port, web_name=web_name)
+            yield proxy
 
 
 if __name__ == '__main__':
@@ -168,10 +178,10 @@ if __name__ == '__main__':
     # spider = ProxylistplusSpider()
     spider = Ip66Spider()
     count = 0
-    # for proxy in spider.get_proxies():
-    #     count += 1
-    #     print(proxy)
-    for ip in spider.urls:
-        print(ip)
+    for proxy in spider.get_proxies():
         count += 1
+        print(proxy.ip)
+    # for ip in spider.urls:
+    #     print(ip)
+    #     count += 1
     print(count)
