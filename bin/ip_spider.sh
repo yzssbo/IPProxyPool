@@ -4,9 +4,9 @@ declare -r CUR_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 declare -r ROOT_PATH=$(dirname "${CUR_PATH}")
 declare -r APEND_PATH=$(dirname "${ROOT_PATH}")
 declare -r LOG_DIR_PATH="${ROOT_PATH}/logs"
-declare -r PYTHON_FILE="${ROOT_PATH}/async/run_spider.py"
-declare -r STOP_FILE="${ROOT_PATH}/async/__stop_run_spider__"
-declare -r LOG_FILE="${LOG_DIR_PATH}/shell_run_spider.log"
+declare -r PYTHON_FILE="${ROOT_PATH}/async/ip_spider.py"
+declare -r STOP_FILE="${ROOT_PATH}/async/__stop_ip_spider__"
+declare -r LOG_FILE="${LOG_DIR_PATH}/shell_ip_spider.log"
 
 source $HOME/Venv/ip/bin/activate
 

@@ -22,7 +22,7 @@ from IPProxyPool.settings import PROXIES_SPIDERS, SPIDER_TIME_DELAY
 目标: 根据配置文件信息, 加载爬虫, 抓取代理IP, 进行校验, 如果可用, 写入到数据库中
 思路:
 
-1. 在run_spider.py中, 创建RunSpider类
+1. 在run_spider.py中, 创建IpSpider类
 2. 提供一个运行爬虫的run方法, 作为运行爬虫的入口, 实现核心的处理逻辑
     2.1 根据配置文件信息, 获取爬虫对象列表.
     2.2 遍历爬虫对象列表, 获取爬虫对象, 遍历爬虫对象的get_proxies方法, 获取代理IP
@@ -39,12 +39,12 @@ from IPProxyPool.settings import PROXIES_SPIDERS, SPIDER_TIME_DELAY
     4.2 创建当前类的对象, 调用run方法
     4.3 使用schedule模块, 每隔一定的时间, 执行当前对象的run方法
 """
-log_name = 'RunSpider'
-log_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../logs', 'run_spider.log')
+log_name = 'IpSpider'
+log_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../logs', 'ip_spider.log')
 MaxLogging.init(log_file, log_name)
 
 
-class RunSpider(object):
+class IpSpider(object):
     def __init__(self):
         # 创建MongoPool对象
         self.mongo_pool = MongoPool()
@@ -97,9 +97,9 @@ class RunSpider(object):
 
 
 if __name__ == '__main__':
-    RunSpider.start()
-    schedule.every(SPIDER_TIME_DELAY).hours.do(RunSpider.start)
-    stop_file = os.path.join(os.path.dirname(__file__), '__stop_run_spider__')
+    IpSpider.start()
+    schedule.every(SPIDER_TIME_DELAY).hours.do(IpSpider.start)
+    stop_file = os.path.join(os.path.dirname(__file__), '__stop_ip_spider__')
     while True:
         if os.path.exists(stop_file):
             break
