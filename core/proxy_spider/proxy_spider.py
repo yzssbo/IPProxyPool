@@ -91,7 +91,7 @@ class KuaiSpider(BaseSpider):
     # 当我们两个页面访问时间间隔太短了, 就报错了; 这是一种反爬手段.
     def get_page_from_url(self, url):
         # 随机等待1,3s
-        time.sleep(random.uniform(1, 3))
+        # time.sleep(random.uniform(1, 3))
         # 调用父类的方法, 发送请求, 获取响应数据
         return super().get_page_from_url(url)
 
@@ -122,7 +122,7 @@ class ProxylistplusSpider(BaseSpider):
     # 当我们两个页面访问时间间隔太短了, 就报错了; 这是一种反爬手段.
     def get_page_from_url(self, url):
         # 随机等待1,3s
-        time.sleep(random.uniform(1, 3))
+        # time.sleep(random.uniform(1, 3))
         # 调用父类的方法, 发送请求, 获取响应数据
         return super().get_page_from_url(url)
 
@@ -156,7 +156,7 @@ class Ip66Spider(BaseSpider):
     # 当我们两个页面访问时间间隔太短了, 就报错了; 这是一种反爬手段.
     def get_page_from_url(self, url):
         # 随机等待1,3s
-        time.sleep(random.uniform(1, 3))
+        # time.sleep(random.uniform(1, 3))
         response = requests.get(url, headers=get_request_header())
         return response.text
 
