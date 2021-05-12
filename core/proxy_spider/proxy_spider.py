@@ -140,7 +140,7 @@ class Ip66Spider(BaseSpider):
     urls = ['http://www.66ip.cn/{}.html'.format(i) for i in range(1, 6)]
     urls.extend(['http://www.66ip.cn/areaindex_{0}/{1}.html'.format(i, j) for i in range(1, 10) for j in range(1, 10)])
     # # 分组的XPATH, 用于获取包含代理IP信息的标签列表
-    group_xpath = '//*[@id="main"]/div[1]/div[2]/div[1]/table/tbody/tr[position()>1]'
+    group_xpath = '//*[@id="main"]//table/tbody/tr[position()>1]'
     # 组内的XPATH, 用于提取 ip, port, area
     detail_xpath = {
         'ip': './td[1]/text()',
