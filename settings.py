@@ -29,7 +29,7 @@ PROXIES_SPIDERS = [
 
 
 # 定时启动爬虫任务时间间隔
-SPIDER_TIME_DELAY = 3
+SPIDER_TIME_DELAY = 2
 
 # 定时启动检测IP任务时间间隔
 TEST_PROXIES_INTERVAL = 3

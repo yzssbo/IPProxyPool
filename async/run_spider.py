@@ -87,6 +87,7 @@ class RunSpider(object):
                 if proxy.speed != -1:
                     # 写入数据库
                     self.mongo_pool.insert_one(proxy)
+                    MaxLogging.get_logger(log_name).info('-'*20 + '> 成功抓取 {}'.format(proxy.ip))
         except Exception as e:
             MaxLogging.get_logger(log_name).exception(e)
 

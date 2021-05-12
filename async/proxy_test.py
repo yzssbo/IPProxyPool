@@ -9,6 +9,7 @@ from gevent import monkey
 
 from IPProxyPool.core.proxy_validate.httpbin_validator import check_proxy
 from IPProxyPool.settings import TEST_PROXIES_ASYNC_COUNT, MAX_SCORE, TEST_PROXIES_INTERVAL
+from max_toolbox.max_logging import MaxLogging
 
 monkey.patch_all()
 from gevent.pool import Pool
@@ -39,6 +40,10 @@ from gevent.pool import Pool
             4.2.2 调用run方法
             4.2.3 每间隔一定时间, 执行一下, run方法  
 """
+
+log_name = 'ProxyTest'
+log_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../logs', 'proxy_test.log')
+MaxLogging.init(log_file, log_name)
 
 
 class ProxyTester(object):
@@ -81,14 +86,18 @@ class ProxyTester(object):
             # 如果代理分数等于0就从数据库中删除该代理IP
             if proxy.score == 0:
                 self.mongo_pool.delete_one(proxy)
+                MaxLogging.get_logger(log_name).info('del useless ip {}'.format(proxy.ip))
             else:
                 # 否则更新该代理IP分数
                 self.mongo_pool.update_one(proxy)
+                MaxLogging.get_logger(log_name).info('ip {0} score decrement {1}'.format(proxy.ip, proxy.score))
+
         else:
             # 如果代理IP可用, 并且此时分数不为满分时, 就恢复该代理的分数,并更新
             if proxy.score != MAX_SCORE:
                 proxy.score = MAX_SCORE
             self.mongo_pool.update_one(proxy)
+            MaxLogging.get_logger(log_name).info('update ip score {}'.format(proxy.ip))
 
         # 调度队列的task_done方法, 通知队列当前单位任务已完成
         self.queue.task_done()
